@@ -1,33 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --app-font: "Bricolage Grotesque", sans-serif;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: var(--app-font);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  :root {
+    --background: 222.86 63.64% 97.84%;
+    --foreground: 224.21 76% 4.9%;
+
+    --primary: 224.28 76.33% 48.04%;
+    --primary-foreground: 0 0% 100%;
+
+    --card: 222.86 63.64% 97.84%;
+    --card-foreground: 224.21 76% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224.21 76% 4.9%;
+
+    --secondary: 225 70% 92.16%;
+    --secondary-foreground: 225 80% 1.96%;
+
+    --muted: 224.21 70.37% 94.71%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 224.21 70.37% 94.71%;
+    --accent-foreground: 224.28 76.33% 48.04%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 90.2%;
+    --input: 0 0% 90.2%;
+    --ring: 224.28 76.33% 48.04%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 225 80% 1.96%;
+    --foreground: 225 70% 92.16%;
+
+    --primary: 224.28 76.33% 48.04%;
+    --primary-foreground: 0 0% 100%;
+
+    --card: 225 80% 1.96%;
+    --card-foreground: 225 70% 92.16%;
+
+    --popover: 225 80% 1.96%;
+    --popover-foreground: 225 70% 92.16%;
+
+    --secondary: 224.55 76.74% 16.86%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 225 13.33% 11.76%;
+    --muted-foreground: 225 1.6% 50.98%;
+
+    --accent: 224.55 76.74% 16.86%;
+    --accent-foreground: 225 70% 92.16%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 224.28 76.33% 48.04%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
