@@ -1,4 +1,4 @@
-import { Dashboard } from "@/components/back-end/full";
+import { Dashboard } from "@/components/back-end/dashboard";
 import React from "react";
 
 export default function page() {

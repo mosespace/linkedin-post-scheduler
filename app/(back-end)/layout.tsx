@@ -25,8 +25,16 @@
 //   );
 // }
 
+import DashboardHeader from "@/components/back-end/dashboard-header";
+import DashboardSidebar from "@/components/back-end/dashboard-sidebar";
 import React, { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <div>{children}</div>;
+  return (
+    <div className='overflow-hiddens'>
+      <DashboardHeader />
+      <DashboardSidebar />
+      <div className='overflow-hidden'>{children}</div>
+    </div>
+  );
 }

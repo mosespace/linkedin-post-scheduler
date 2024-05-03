@@ -3,10 +3,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/front-end/header";
+import { SendFeedback } from "@/components/front-end/send-feedback";
 
 export const metadata: Metadata = {
-  title: "linkedin-post-scheduler",
-  description: "linkedin-post-scheduler",
+  title: "Linker | All Links in One Place",
+  description:
+    "Revolutionize your LinkedIn presence with daily AI-generated posts.Elevate engagement effortlessly with our freemium ai tool!",
 };
 
 export default function RootLayout({
@@ -25,6 +27,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
+          <SendFeedback />
         </ThemeProvider>
       </body>
     </html>

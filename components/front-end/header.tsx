@@ -31,14 +31,14 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/dashboard")) {
+  if (pathname.startsWith("/@")) {
     return null;
   }
   return (
     <div className='container z-50 fixed top-t inset-x-0 flex flex-col items-center gap-4 my-12'>
       <header className='w-full flex items-center justify-between'>
         <Link href='/' className='text-xl font-bold'>
-          PoLinkedin🔥
+          Linker🔥
           {/* <span className='text-sm font-bold'>poLinkedin🔥</span> */}
         </Link>
         <div className='flex gap-2 items-center'>
