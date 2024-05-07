@@ -27,7 +27,7 @@ export default function DashboardHeader() {
     <header className='sticky top-0 z-10 flex h-[57px] items-center gap-1 justify-between border-b bg-background px-4'>
       <h1 className='text-xl font-semibold'>
         <Link href='/' className='text-xl font-bold'>
-          PoLinkedin
+          Linker
         </Link>
       </h1>
       <Drawer>

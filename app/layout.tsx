@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/front-end/header";
 import { SendFeedback } from "@/components/front-end/send-feedback";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Linker | All Links in One Place",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Header />
           {children}
           <SendFeedback />
+          <Toaster position='top-center' richColors />
         </ThemeProvider>
       </body>
     </html>

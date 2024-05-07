@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Facebook,
   Github,
+  Globe,
   Instagram,
   Linkedin,
   Twitter,
@@ -157,6 +158,12 @@ export default function page({
               return <Twitter className='w-6 h-6' />;
             } else if (title.toLowerCase().includes("github")) {
               return <Github className='w-6 h-6' />;
+            } else if (
+              title
+                .toLowerCase()
+                .includes("websites" || "portfolio" || "personal" || "site")
+            ) {
+              return <Globe className='w-6 h-6' />;
             }
           };
           return (
@@ -170,7 +177,7 @@ export default function page({
               >
                 <span>{renderIcon(item.title as string)}</span>
 
-                <span>Checkout My {item.title}</span>
+                <span className='Capitalize'>Checkout My {item.title}</span>
               </Link>
             </div>
           );

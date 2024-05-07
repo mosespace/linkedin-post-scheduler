@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bird,
   Book,
@@ -16,6 +18,7 @@ import {
   Triangle,
   Turtle,
 } from "lucide-react";
+import { useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -46,18 +49,22 @@ import {
 import Link from "next/link";
 import { ThemeToggle } from "../theme-toggle";
 import Post from "./post";
+import ImageUploader from "./image-uploader";
+import React from "react";
 
-export function Dashboard() {
+export function Dashboard({ initialData }: { initialData?: any }) {
+  const [imageUrl, setImageUrl] = useState(initialData?.image);
+  const [loading, setLoading] = useState(false);
   return (
     <div className='grid h-screen w-full pl-[56px]'>
       <div className='flex flex-col'>
-        {/* <main className='grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3'>
+        <main className='grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3'>
           <div
             className='relative hidden flex-col items-start gap-8 md:flex'
             x-chunk='dashboard-03-chunk-0'
           >
             <form className='grid w-full items-start gap-6'>
-              <fieldset className='grid gap-6 rounded-lg border p-4'>
+              {/* <fieldset className='grid gap-6 rounded-lg border p-4'>
                 <legend className='-ml-1 px-1 text-sm font-medium'>
                   Settings
                 </legend>
@@ -136,12 +143,12 @@ export function Dashboard() {
                     <Input id='top-k' type='number' placeholder='0.0' />
                   </div>
                 </div>
-              </fieldset>
+              </fieldset> */}
               <fieldset className='grid gap-6 rounded-lg border p-4'>
                 <legend className='-ml-1 px-1 text-sm font-medium'>
-                  Messages
+                  User Settings
                 </legend>
-                <div className='grid gap-3'>
+                {/* <div className='grid gap-3'>
                   <Label htmlFor='role'>Role</Label>
                   <Select defaultValue='system'>
                     <SelectTrigger>
@@ -153,15 +160,58 @@ export function Dashboard() {
                       <SelectItem value='assistant'>Assistant</SelectItem>
                     </SelectContent>
                   </Select>
+                </div> */}
+
+                <ImageUploader
+                  label='USer Public Image:'
+                  imageUrl={imageUrl}
+                  setImageUrl={setImageUrl}
+                  endpoint='userProfileImage'
+                />
+
+                <div className='flex justify-between w-full space-x-2'>
+                  <div className='flex w-full flex-col space-y-2'>
+                    <Label htmlFor='userHandle'>USer Handle:</Label>
+                    <Input
+                      id='userHandle'
+                      type='userHandle'
+                      placeholder='linker.com/'
+                    />
+                  </div>
+                  <div className='flex w-full flex-col space-y-2'>
+                    <Label htmlFor='userName'>User Name (Public):</Label>
+                    <Input
+                      id='userName'
+                      type='text'
+                      placeholder='Uncle Moses'
+                    />
+                  </div>
+                </div>
+
+                <div className='flex justify-between w-full space-x-2'>
+                  <div className='flex w-full flex-col space-y-2'>
+                    <Label htmlFor='email'>Email:</Label>
+                    <Input
+                      id='email'
+                      type='email'
+                      disabled={true}
+                      placeholder='kiskayemoses@gmail.com'
+                    />
+                  </div>
+                  <div className='flex w-full flex-col space-y-2'>
+                    <Label htmlFor='tel'>Tel:</Label>
+                    <Input id='tel' type='tel' placeholder='+256-770-981-193' />
+                  </div>
                 </div>
                 <div className='grid gap-3'>
-                  <Label htmlFor='content'>Content</Label>
+                  <Label htmlFor='content'>Bio</Label>
                   <Textarea
                     id='content'
                     placeholder='You are a...'
                     className='min-h-[9.5rem]'
                   />
                 </div>
+                <Button>Submit</Button>
               </fieldset>
             </form>
           </div>
@@ -170,7 +220,7 @@ export function Dashboard() {
               Output
             </Badge>
             <div className='flex-1' />
-            <form
+            {/* <form
               className='relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring'
               x-chunk='dashboard-03-chunk-1'
             >
@@ -212,13 +262,14 @@ export function Dashboard() {
                   <CornerDownLeft className='size-3.5' />
                 </Button>
               </div>
-            </form>
+            </form> */}
+            {/* <Button>Submit</Button> */}
           </div>
-        </main> */}
+        </main>
 
-        <div className='grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3'>
+        {/* <div className='grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3'>
           <Post />
-        </div>
+        </div> */}
       </div>
     </div>
   );
