@@ -16,8 +16,9 @@ datasource db {
 // Define the User model
 model User {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  firstName  String? @unique
-  lastName   String? @unique
+  firstName  String? 
+  lastName   String? 
+  nickName   String? 
   userHandle String? @unique
   email      String  @unique
   image      String?

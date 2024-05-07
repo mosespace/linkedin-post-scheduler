@@ -181,7 +181,7 @@ export function Dashboard({ initialData }: { initialData?: any }) {
                   <div className='flex w-full flex-col space-y-2'>
                     <Label htmlFor='userName'>User Name (Public):</Label>
                     <Input
-                      id='userName'
+                      id='nickName'
                       type='text'
                       placeholder='Uncle Moses'
                     />

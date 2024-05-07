@@ -62,7 +62,7 @@ export default function Login() {
         setLoading(false);
         toast.success("Login has been created successfully");
         reset();
-        router.push(`/dashboard`);
+        router.push(`/wizard`);
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);

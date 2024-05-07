@@ -92,6 +92,7 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           firstName: token.firstName,
           lastName: token.lastName,
+          nickName: token.nickName,
           email: token.email,
           image: token.picture,
           role: token.role,
@@ -99,6 +100,7 @@ export const authOptions: NextAuthOptions = {
           id: string;
           firstName: string;
           lastName: string;
+          nickName: string | null;
           email: string;
           image?: string | null;
           role?: string;
@@ -128,6 +130,7 @@ export const authOptions: NextAuthOptions = {
         id: dbUser.id,
         firstName: dbUser.firstName,
         lastName: dbUser.lastName,
+        nickName: dbUser.nickName,
         email: dbUser.email,
         picture: dbUser.image,
       };
