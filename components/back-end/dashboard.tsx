@@ -1,35 +1,12 @@
 "use client";
 
-import {
-  Bird,
-  Book,
-  Bot,
-  Code2,
-  CornerDownLeft,
-  LifeBuoy,
-  Mic,
-  Paperclip,
-  Rabbit,
-  Settings,
-  Settings2,
-  Share,
-  SquareTerminal,
-  SquareUser,
-  Triangle,
-  Turtle,
-} from "lucide-react";
+import { Bird, Rabbit, Turtle, PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -40,21 +17,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import Link from "next/link";
-import { ThemeToggle } from "../theme-toggle";
-import Post from "./post";
-import ImageUploader from "./image-uploader";
+import { useForm } from "react-hook-form";
 import React from "react";
 
 export function Dashboard({ initialData }: { initialData?: any }) {
-  const [imageUrl, setImageUrl] = useState(initialData?.image);
   const [loading, setLoading] = useState(false);
+  const [links, setLinks] = useState([
+    { platform: "", title: "", description: "", url: "" },
+  ]);
+
+  const addLink = () => {
+    setLinks([...links, { platform: "", title: "", description: "", url: "" }]);
+  };
+
+  // const [imageUrl, setImageUrl] = useState(initialData?.image);
   return (
     <div className='grid h-screen w-full pl-[56px]'>
       <div className='flex flex-col'>
@@ -64,11 +40,12 @@ export function Dashboard({ initialData }: { initialData?: any }) {
             x-chunk='dashboard-03-chunk-0'
           >
             <form className='grid w-full items-start gap-6'>
-              {/* <fieldset className='grid gap-6 rounded-lg border p-4'>
-                <legend className='-ml-1 px-1 text-sm font-medium'>
-                  Settings
-                </legend>
-                <div className='grid gap-3'>
+              <ScrollArea className='h-[80%] w-full rounded-md border'>
+                <fieldset className='grid gap-6 rounded-lg border p-4'>
+                  <legend className='-ml-1 px-1 text-sm font-medium'>
+                    Settings
+                  </legend>
+                  {/* <div className='grid gap-3'>
                   <Label htmlFor='model'>Model</Label>
                   <Select>
                     <SelectTrigger
@@ -142,77 +119,124 @@ export function Dashboard({ initialData }: { initialData?: any }) {
                     <Label htmlFor='top-k'>Top K</Label>
                     <Input id='top-k' type='number' placeholder='0.0' />
                   </div>
-                </div>
-              </fieldset> */}
-              <fieldset className='grid gap-6 rounded-lg border p-4'>
-                <legend className='-ml-1 px-1 text-sm font-medium'>
-                  User Settings
-                </legend>
-                {/* <div className='grid gap-3'>
-                  <Label htmlFor='role'>Role</Label>
-                  <Select defaultValue='system'>
-                    <SelectTrigger>
-                      <SelectValue placeholder='Select a role' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='system'>System</SelectItem>
-                      <SelectItem value='user'>User</SelectItem>
-                      <SelectItem value='assistant'>Assistant</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div> */}
+                  <div>
+                    {links.map((link, index) => (
+                      <div key={index} className='my-4 border rounded p-4'>
+                        <h3 className='text-lg font-semibold mb-2'>
+                          Link {index + 1}
+                        </h3>
+                        <div className='flex flex-col space-y-2'>
+                          <Label htmlFor='model'>Social Media Platforms</Label>
+                          <Select>
+                            <SelectTrigger
+                              id='model'
+                              className='items-start [&_[data-description]]:hidden'
+                            >
+                              <SelectValue placeholder='Select Platform' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value='genesis'>
+                                <div className='flex items-start gap-3 text-muted-foreground'>
+                                  <Rabbit className='size-5' />
+                                  <div className='grid gap-0.5'>
+                                    <p>
+                                      Neural{" "}
+                                      <span className='font-medium text-foreground'>
+                                        Genesis
+                                      </span>
+                                    </p>
+                                    <p className='text-xs' data-description>
+                                      Our fastest model for general use cases.
+                                    </p>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                              <SelectItem value='explorer'>
+                                <div className='flex items-start gap-3 text-muted-foreground'>
+                                  <Bird className='size-5' />
+                                  <div className='grid gap-0.5'>
+                                    <p>
+                                      Neural{" "}
+                                      <span className='font-medium text-foreground'>
+                                        Explorer
+                                      </span>
+                                    </p>
+                                    <p className='text-xs' data-description>
+                                      Performance and speed for efficiency.
+                                    </p>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                              <SelectItem value='quantum'>
+                                <div className='flex items-start gap-3 text-muted-foreground'>
+                                  <Turtle className='size-5' />
+                                  <div className='grid gap-0.5'>
+                                    <p>
+                                      Neural{" "}
+                                      <span className='font-medium text-foreground'>
+                                        Quantum
+                                      </span>
+                                    </p>
+                                    <p className='text-xs' data-description>
+                                      The most powerful model for complex
+                                      computations.
+                                    </p>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <div className='flex pt-2 flex-col justify-between w-full space-y-4'>
+                            <div className='flex w-full flex-col space-y-2'>
+                              <Label htmlFor='title'>Link Title:</Label>
+                              <Input
+                                id='title'
+                                type='title'
+                                placeholder='My LinkedIn Link'
+                              />
+                            </div>
 
-                <ImageUploader
-                  label='USer Public Image:'
-                  imageUrl={imageUrl}
-                  setImageUrl={setImageUrl}
-                  endpoint='userProfileImage'
-                />
+                            <div className='flex w-full flex-col space-y-2'>
+                              <Label htmlFor='description'>
+                                Link Description:
+                              </Label>
 
-                <div className='flex justify-between w-full space-x-2'>
-                  <div className='flex w-full flex-col space-y-2'>
-                    <Label htmlFor='userHandle'>USer Handle:</Label>
-                    <Input
-                      id='userHandle'
-                      type='userHandle'
-                      placeholder='linker.com/'
-                    />
-                  </div>
-                  <div className='flex w-full flex-col space-y-2'>
-                    <Label htmlFor='userName'>User Name (Public):</Label>
-                    <Input
-                      id='nickName'
-                      type='text'
-                      placeholder='Uncle Moses'
-                    />
-                  </div>
-                </div>
+                              <Textarea
+                                id='description'
+                                placeholder='you can add any description here and that will be attached on the link'
+                              />
+                            </div>
 
-                <div className='flex justify-between w-full space-x-2'>
-                  <div className='flex w-full flex-col space-y-2'>
-                    <Label htmlFor='email'>Email:</Label>
-                    <Input
-                      id='email'
-                      type='email'
-                      disabled={true}
-                      placeholder='kiskayemoses@gmail.com'
-                    />
+                            <div className='flex w-full flex-col space-y-2'>
+                              <Label htmlFor='callToAction'>Link Url:</Label>
+                              <Input
+                                id='callToAction'
+                                type='callToAction'
+                                placeholder='eg: https:x.com/bantu_creative'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <>
+                      <Button
+                        type='button'
+                        onClick={addLink}
+                        variant='outline'
+                        className='flex w-full items-center justify-between text-primary mt-4'
+                      >
+                        <PlusCircle className='mr-1' size={18} />
+                        Add Link
+                      </Button>
+                      <Button className='bg-primary w-full text-white px-4 py-2 mt-4 rounded'>
+                        Save
+                      </Button>
+                    </>
                   </div>
-                  <div className='flex w-full flex-col space-y-2'>
-                    <Label htmlFor='tel'>Tel:</Label>
-                    <Input id='tel' type='tel' placeholder='+256-770-981-193' />
-                  </div>
-                </div>
-                <div className='grid gap-3'>
-                  <Label htmlFor='content'>Bio</Label>
-                  <Textarea
-                    id='content'
-                    placeholder='You are a...'
-                    className='min-h-[9.5rem]'
-                  />
-                </div>
-                <Button>Submit</Button>
-              </fieldset>
+                </fieldset>
+              </ScrollArea>
             </form>
           </div>
           <div className='relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2'>

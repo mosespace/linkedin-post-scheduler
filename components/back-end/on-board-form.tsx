@@ -88,7 +88,7 @@ export default function OnBoardForm({ initialData }: IUser) {
         </legend>
 
         <ImageUploader
-          label='USer Public Image:'
+          label='User Public Image:'
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
           endpoint='userProfileImage'
@@ -96,7 +96,7 @@ export default function OnBoardForm({ initialData }: IUser) {
 
         <div className='flex justify-between w-full space-x-2'>
           <div className='flex w-full flex-col space-y-2'>
-            <Label htmlFor='userHandle'>USer Handle:</Label>
+            <Label htmlFor='userHandle'>User Handle:</Label>
             <Input
               {...register("userHandle", { required: true })}
               id='userHandle'
