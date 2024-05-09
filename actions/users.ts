@@ -4,8 +4,6 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import { IUser } from "@/types/user";
-import { User } from "@prisma/client";
 
 interface IRegisterInputs {
   firstName: string;
@@ -61,6 +59,23 @@ export async function getSingleUser(id: any) {
     const user = await db.user.findUnique({
       where: {
         id: id,
+      },
+    });
+    return user;
+  } catch (error: any) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getUserByUserHandle(userHandle: any) {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        userHandle: userHandle,
+      },
+      include: {
+        links: true,
       },
     });
     return user;

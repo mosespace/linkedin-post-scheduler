@@ -33,6 +33,7 @@ model User {
 // Define the Link model
 model Link {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  socialMediaName String?
   title        String
   description  String?
   callToAction String?
