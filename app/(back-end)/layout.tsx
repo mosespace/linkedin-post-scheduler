@@ -16,7 +16,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
     <div className='overflow-hiddens'>
       <DashboardHeader />
       <DashboardSidebar />
-      <div className='overflow-hidden'>{children}</div>
+      <div className='overflow-hiddens'>{children}</div>
     </div>
   );
 }
